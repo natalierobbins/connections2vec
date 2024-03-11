@@ -45,21 +45,21 @@ tables = {
 }
 
 def generate(input):
-    con = sqlite3.connect('maps.sqlite3')
+    con = sqlite3.connect('wordnet2vec.sqlite3')
     with open(f"{input}.txt", 'r') as f:
         input = f.read()
     
-    for line in tqdm(input.split('\n')[1:-1]):
-        line = line.split(' ')
+    for line in tqdm(input.split('\n')[:-1]):
+        line = line.split('\t')
         key, val = line[0], (' ').join(line[1:])
-        sql = f"INSERT INTO vectors(sense, vector) VALUES (?, ?);"
+        sql = f"INSERT INTO keys(sense, key) VALUES (?, ?);"
         data = (key, val)
         con.execute(sql, data)
     con.commit()
     # with open(output_path, 'w+') as f:
     #     json.dump(hash_map, f, indent=4)
 
-con = sqlite3.connect('maps.sqlite3')
+con = sqlite3.connect('wordnet2vec.sqlite3')
 # for table in tables.keys():
 #     table = tables[table]
 #     con.execute(f"""
@@ -68,6 +68,6 @@ con = sqlite3.connect('maps.sqlite3')
 #             {table['value']} VARCHAR
 #         );
 #     """)
-generate('wn_sense_vectors')
+generate('sense_key_map')
 # curs = con.execute("SELECT * FROM keys;")
 # print(curs.fetchall())

@@ -3,7 +3,7 @@ import sqlite3
 import numpy as np
 
 
-con = sqlite3.connect('./maps.sqlite3')
+con = sqlite3.connect('./wordnet2vec.sqlite3')
 
 
 def get_senses(word):
@@ -40,3 +40,5 @@ def get_data(word):
             'vector': vector
         })
     return data
+
+print(get_data('unable'))
