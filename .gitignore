@@ -1,0 +1,5 @@
+maps.sqlite3
+sense_key_map.txt
+sense_list.txt
+wn_sense_vectors.txt
+__pycache__
